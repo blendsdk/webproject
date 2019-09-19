@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "development") {
 
 let server: Server = null;
 
-if (!process.env.NODE_JEST) {
+if (process.env.NODE_ENV !== "test") {
     server = app.listen(app.get("port"), () => {
         logger.info("App is running at http://localhost:%d in %s mode", app.get("port"), app.get("env"));
         logger.info("Press CTRL-C to stop\n");

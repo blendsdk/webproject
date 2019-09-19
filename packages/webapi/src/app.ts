@@ -44,7 +44,7 @@ app.use((req: Request, _res: Response, next: NextFunction) => {
 });
 
 buildRoutes(app, ApiRoutes);
-if (process.env.NODE_JEST) {
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
     logger.info("Enabling test routes");
     buildRoutes(app, require("./tests/routes").default);
 }

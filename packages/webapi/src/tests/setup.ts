@@ -2,10 +2,10 @@ import { asyncForEach } from "@blendsdk/stdlib";
 import { createConnection, closeConnection as closeConnectionServer } from "@blendsdk/sqlkit";
 import * as fs from "fs";
 import * as path from "path";
-import { loadConfiguration } from '@blendsdk/express';
-import { fromRoot } from '../utils';
+import { loadConfiguration } from "@blendsdk/express";
+import { fromRoot } from "../utils";
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = "test";
 loadConfiguration([
     fromRoot("config", "config.base.json"),
     fromRoot("config", "config.%node_env%.json"),
