@@ -1,0 +1,19 @@
+{
+    "PORT": 3000,
+
+    "PGHOST": "localhost",
+    "PGUSER": "postgres",
+    "PGDATABASE": "myproject",
+    "PGPASSWORD": "********",
+    "PGPORT": 5432,
+
+    "JWT_SECRET": "<put you key here>",
+    "JWT_MAX_AGE": 54000,
+
+    "SMTP_HOST":"my.smtp.host",
+    "SMTP_PORT":587,
+    "SMTP_USERNAME":"user",
+    "SMTP_PASSWORD":"********",
+    "SMTP_SECURE": false,
+    "STATIC_FILES_MAX_AGE": 31557600000
+}

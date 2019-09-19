@@ -1,0 +1,1 @@
+insert into sys_role (role_name) values ('admin');
