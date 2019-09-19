@@ -38,6 +38,7 @@ test("validate user", async () => {
 
 test("assign roles to user", async () => {
     const user = await insertIntoSysUser({
+        user_id: 2,
         username: "user2",
         password: "secret",
         email: "user2@example.com"

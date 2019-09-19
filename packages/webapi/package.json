@@ -10,10 +10,6 @@
     "author": "",
     "license": "MIT",
     "scripts": {
-        "seed_test": "node ./dist/src/tests/seed.js",
-        "mkclient": "node ./dist/src/client/index.js",
-        "mkdb": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/mkdb.js && yarn tslint",
-        "mkapi": "rm -fR ./schema/dist && tsc -p ./schema && node ./schema/dist/mkapi.js && yarn tslint",
         "start": "npm run serve",
         "build": "npm run build-ts && npm run tslint",
         "serve": "node dist/server.js",

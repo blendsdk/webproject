@@ -10,10 +10,8 @@ BEGIN
         EXECUTE 'TRUNCATE TABLE ' || quote_ident(stmt.tablename) || ' CASCADE;';
     END LOOP;
 END;
-$$ 
+$$
 
 LANGUAGE plpgsql;
 
 select * from truncate_tables();
-
-insert into sys_role (role_name) values ('admin');
