@@ -19,7 +19,7 @@
         "serve": "node dist/src/server.js",
         "watch-node": "nodemon dist/src/server.js",
         "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
-        "test": "NODE_JEST=true jest --detectOpenHandles --verbose --runInBand --forceExit",
+        "test": "cross-env NODE_JEST=true && jest --detectOpenHandles --verbose --runInBand --forceExit",
         "watch-test": "npm run test -- --watchAll",
         "build-ts": "tsc",
         "watch-ts": "tsc -w",

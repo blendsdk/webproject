@@ -1,12 +1,11 @@
 import "./setup";
-import { seedDatabase, closeConnection, rebuildDatabase } from "./setup";
+import { seedDatabase, closeConnection } from "./setup";
 import { insertIntoSysUser, getSysUserByUserId } from "../database/sys_user";
 import { validateUser } from "../services/authentication";
 import { assignRolesToUser } from "../services/accounts";
 import { insertIntoSysRole } from "../database/sys_role";
 
 beforeAll(async () => {
-    await rebuildDatabase();
     await seedDatabase("seed.sql");
 });
 

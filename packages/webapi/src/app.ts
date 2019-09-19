@@ -6,17 +6,18 @@ import path from "path";
 import bearerToken from "express-bearer-token";
 import cors from "cors";
 import { logger } from "./logger";
-import { buildRoutes, getParameters, loadConfiguration   } from "@blendsdk/express";
+import { buildRoutes, getParameters, loadConfiguration } from "@blendsdk/express";
 import ApiRoutes from "./routes";
 import { initializeMailer } from "./services/mailer";
+import { fromRoot } from "./utils";
 
 
 // Set the default environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
 loadConfiguration([
-    "./config/config.base.json",
-    "./config/config.%node_env%.json",
-    "./config/.config.local.json"
+    fromRoot("config", "config.base.json"),
+    fromRoot("config", "config.%node_env%.json"),
+    fromRoot("config", ".config.local.json")
 ]);
 
 // Initializing the SMTPMailer
