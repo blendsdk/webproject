@@ -5,7 +5,7 @@
     "description": "The WebAPI project",
     "repository": {
         "type": "git",
-        "url": "https://github.com/blendsdk/webapi.git"
+        "url": "https://github.com/blendsdk/webproject.git"
     },
     "author": "",
     "license": "MIT",
