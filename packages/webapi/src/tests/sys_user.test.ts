@@ -15,6 +15,7 @@ afterAll(async () => {
 
 test("create user", async () => {
     const user = await insertIntoSysUser({
+        user_id: 1,
         username: "user1",
         password: "secret",
         email: "user1@example.com"
