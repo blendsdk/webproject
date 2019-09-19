@@ -15,3 +15,5 @@ $$
 LANGUAGE plpgsql;
 
 select * from truncate_tables();
+
+DROP FUNCTION IF EXISTS truncate_tables();
