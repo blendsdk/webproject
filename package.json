@@ -1,0 +1,26 @@
+{
+  "name": "webproject",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "author": "Gevik Babakhani <gevikb@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna clean -y && lerna bootstrap",
+    "build": "lerna run build --stream",
+    "test": "lerna run test --stream"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blendsdk/webproject.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "cross-env": "^6.0.0",
+    "lerna": "^3.16.4",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
+  }
+}
