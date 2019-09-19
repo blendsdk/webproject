@@ -3,6 +3,7 @@ import { response, createJWToken, IJwtTokenResult, getParameters } from "@blends
 import { t } from "../../i18n";
 import { validateUser } from "../../services/authentication";
 import { IApiAuthenticationRequest } from "../../common/api_types";
+import { getConfig } from "../../config";
 /**
  * Validates the user and provides a JWT authentication token.
  *
@@ -17,10 +18,13 @@ export async function loginController(req: Request, res: Response) {
         if (!vUser.error) {
             return response(res).OK<IJwtTokenResult>({
                 success: true,
-                token: createJWToken({
-                    sessionData: vUser.user,
-                    maxAge: (process.env.JWT_MAX_AGE as any) || 2592000
-                })
+                token: createJWToken(
+                    {
+                        sessionData: vUser.user,
+                        maxAge: (process.env.JWT_MAX_AGE as any) || 2592000
+                    },
+                    getConfig()
+                )
             });
         } else {
             return response(res).unAuthorized(t(vUser.error));

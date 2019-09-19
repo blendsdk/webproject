@@ -2,16 +2,13 @@ import { asyncForEach } from "@blendsdk/stdlib";
 import { createConnection, closeConnection as closeConnectionServer } from "@blendsdk/sqlkit";
 import * as fs from "fs";
 import * as path from "path";
-import { loadConfiguration } from "@blendsdk/express";
-import { fromRoot } from "../utils";
+import { getConfig } from "../config";
+import { initializeDatabase } from "../database";
 
 process.env.NODE_ENV = "test";
-loadConfiguration([
-    fromRoot("config", "config.base.json"),
-    fromRoot("config", "config.%node_env%.json"),
-    fromRoot("config", ".config.local.json")
-]);
 
+const config = getConfig();
+initializeDatabase();
 
 export const openConnection = () => {
     return createConnection();
@@ -32,7 +29,7 @@ export const closeConnection = (): Promise<boolean> => {
 export async function seedDatabase(sqlFile: string) {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(`Seeding database ${process.env.PGDATABASE} ${sqlFile}`);
+            console.log(`Seeding database ${config.PG_DATABASE} ${sqlFile}`);
             const sql = fs
                     .readFileSync(path.join(process.cwd(), "src", "tests", sqlFile))
                     .toString()

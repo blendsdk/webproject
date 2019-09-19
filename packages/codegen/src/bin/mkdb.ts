@@ -7,7 +7,13 @@ import { database } from "../dbschema";
 import { loadConfiguration } from "@blendsdk/express";
 import { fromRoot } from "./utils";
 
-loadConfiguration([
+interface IConfig {
+    PG_HOST?: string;
+    PG_DATABASE?: string;
+    CODE_GEN_DBTYPES?: string | string[];
+}
+
+const config = loadConfiguration<IConfig>([
     fromRoot("config", "config.base.json"),
     fromRoot("config", "config.codegen.json")
 ]);
@@ -30,9 +36,9 @@ const command = process.argv[2] || "";
 
 function showEnv() {
     console.log("-".repeat(80));
-    console.log(`PGHOST: ${chalk.green(process.env.PGHOST)}`);
-    console.log(`PGDATABASE: ${chalk.green(process.env.PGDATABASE)}`);
-    console.log(`CODE_GEN_DBTYPES: ${chalk.green(process.env.CODE_GEN_DBTYPES)}`);
+    console.log(`PG_HOST: ${chalk.green(config.PG_HOST)}`);
+    console.log(`PG_DATABASE: ${chalk.green(config.PG_DATABASE)}`);
+    console.log(`CODE_GEN_DBTYPES: ${chalk.green(wrapInArray(config.CODE_GEN_DBTYPES).join(", "))}`);
     console.log("-".repeat(80));
 }
 
@@ -51,7 +57,7 @@ async function generateDatabase() {
 
 function generateDatabaseTypes() {
     showEnv();
-    (process.env.CODE_GEN_DBTYPES || "").split(",").forEach(fileName => {
+    wrapInArray<string>(config.CODE_GEN_DBTYPES || []).forEach(fileName => {
         fileName = fromRoot(fileName);
         console.log(chalk.green("Generating Database Types: " + fileName));
         generateInterfacesFromTables(fileName, database.getTables());

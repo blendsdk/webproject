@@ -13,11 +13,11 @@
     "test": "jest --detectOpenHandles --passWithNoTests"
   },
   "dependencies": {
-    "@blendsdk/express": "^1.1.7",
-    "@blendsdk/codekit": "^1.1.4",
-    "@blendsdk/schemakit": "^1.1.4",
-    "@blendsdk/sqlkit": "^1.1.4",
-    "@blendsdk/stdlib": "^1.1.4",
+    "@blendsdk/express": "^1.1.8",
+    "@blendsdk/codekit": "^1.1.8",
+    "@blendsdk/schemakit": "^1.1.8",
+    "@blendsdk/sqlkit": "^1.1.8",
+    "@blendsdk/stdlib": "^1.1.8",
     "chalk": "^2.4.2"
   }
 }

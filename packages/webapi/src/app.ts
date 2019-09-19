@@ -1,3 +1,6 @@
+// Set the default environment to development
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+
 import express, { Request, Response, NextFunction } from "express";
 import compression from "compression"; // compresses requests
 import bodyParser from "body-parser";
@@ -6,19 +9,16 @@ import path from "path";
 import bearerToken from "express-bearer-token";
 import cors from "cors";
 import { logger } from "./logger";
-import { buildRoutes, getParameters, loadConfiguration } from "@blendsdk/express";
+import { buildRoutes, getParameters } from "@blendsdk/express";
 import ApiRoutes from "./routes";
 import { initializeMailer } from "./services/mailer";
-import { fromRoot } from "./utils";
+import { getConfig } from "./config";
+import { initializeDatabase } from "./database";
 
+const config = getConfig();
 
-// Set the default environment to development
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
-loadConfiguration([
-    fromRoot("config", "config.base.json"),
-    fromRoot("config", "config.%node_env%.json"),
-    fromRoot("config", ".config.local.json")
-]);
+// Initializing the database connection
+initializeDatabase();
 
 // Initializing the SMTPMailer
 initializeMailer();
@@ -37,7 +37,7 @@ app.use(lusca.xframe("SAMEORIGIN"));
 app.use(lusca.xssProtection(true));
 app.use(bearerToken());
 app.use(cors({ origin: "*" }));
-app.use(express.static(path.join(process.cwd(), "public"), { maxAge: process.env.STATIC_FILES_MAX_AGE || 31557600000 }));
+app.use(express.static(path.join(process.cwd(), "public"), { maxAge: config.STATIC_FILES_MAX_AGE || 31557600000 }));
 app.use((req: Request, _res: Response, next: NextFunction) => {
     logger.debug(["Request", getParameters<any>(req)]);
     return next();

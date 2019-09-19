@@ -131,13 +131,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@blendsdk/codekit@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-1.1.4.tgz#9417d503fd74d0242b486285413d306fc37b0305"
-  integrity sha512-gtMcdV9QNcp2IEEfMbdwURGrOiAHMOhz1KgJO9tWE76NzFuflVhWdVpaHzTiZYHJvbcoJKFPGjOHxQCRcHQ23g==
+"@blendsdk/codekit@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@blendsdk/codekit/-/codekit-1.1.8.tgz#8ea9c19df9c8a9ef363147b1aba2559bef2ef33d"
+  integrity sha512-ZF3J3pY7d/hqrRyW3cFGwb6JrWblmLveUfsFFL8EIDfull17AO22TjYpwKYCXMXRDD3OZoqpMf66SpnkzKgfcQ==
   dependencies:
-    "@blendsdk/schemakit" "^1.1.4"
-    "@blendsdk/stdlib" "^1.1.4"
+    "@blendsdk/schemakit" "^1.1.8"
+    "@blendsdk/stdlib" "^1.1.8"
     "@types/mkdirp" "^0.5.2"
     chalk "^2.4.2"
     eol "^0.9.1"
@@ -145,12 +145,12 @@
     prettier "1.18.2"
     tslib "^1.10.0"
 
-"@blendsdk/express@^1.1.7":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-1.1.7.tgz#1cae7287927feb4883a6025d5f7461f5c37d699e"
-  integrity sha512-sumayCm/1eRRnUAvF4Zo2lMRrUSJbstsAVCcIDwgVGR/jLExL3jknaYerIaWzkVNb6y5ydcdnQhhtrgQn6bQhw==
+"@blendsdk/express@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-1.1.8.tgz#54e6d4027b14ee13c086b72e0834f6eea546570b"
+  integrity sha512-jlyDsBRlkNPFDAPeqzbrlqkck7w194tvWftDEmRBatWSeu9+13IqLjL8UwmCjNrxgn7bd0DjkhKkGQeY2+V9dw==
   dependencies:
-    "@blendsdk/stdlib" "^1.1.4"
+    "@blendsdk/stdlib" "^1.1.8"
     "@types/express" "^4.17.1"
     "@types/express-session" "^1.15.13"
     "@types/jsonwebtoken" "^8.3.3"
@@ -162,23 +162,40 @@
     nodemailer "^6.3.0"
     winston "^3.2.1"
 
-"@blendsdk/schemakit@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@blendsdk/schemakit/-/schemakit-1.1.4.tgz#c4ab157d881c03913832523fabf0ac1cb36723e0"
-  integrity sha512-PZP4JiDqvi+bcZ/tmC6WqczWUPC31B7zYQwEgDbhUpam1nGlgrMNObqsQkFwotPBhqrMT1xJPFwgfw58+/ChjQ==
+"@blendsdk/express@^1.1.9":
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/@blendsdk/express/-/express-1.1.9.tgz#f426b6c02f7ad727f2f66c9ea6e34f7fe1f52e15"
+  integrity sha512-TqelfemJCnyIgmvLDl9Djd4TB+m289Te9st5QT9EW+gtnHTcN31XZC10q+DbNI/xfFdGH1grVXt2dpCs3HDcZA==
   dependencies:
-    "@blendsdk/stdlib" "^1.1.4"
+    "@blendsdk/stdlib" "^1.1.8"
+    "@types/express" "^4.17.1"
+    "@types/express-session" "^1.15.13"
+    "@types/jsonwebtoken" "^8.3.3"
+    "@types/node" "^12.7.2"
+    "@types/nodemailer" "^6.2.1"
+    express "^4.17.1"
+    express-validator "^6.1.1"
+    jsonwebtoken "^8.5.1"
+    nodemailer "^6.3.0"
+    winston "^3.2.1"
+
+"@blendsdk/schemakit@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@blendsdk/schemakit/-/schemakit-1.1.8.tgz#f0ff4f7dd4af7a217b00df14c704202360ac35da"
+  integrity sha512-b0j+ZLmyjImCBjjOvMU7d0olLswpgURCt55dB++GktwCGGPb2/bCTBTbLKgx1lRwPNZ2Vq44ZQvIikNTSWSOUw==
+  dependencies:
+    "@blendsdk/stdlib" "^1.1.8"
     "@types/pg" "^7.11.0"
     chalk "^2.4.2"
     pg "^7.12.1"
     tslib "^1.10.0"
 
-"@blendsdk/sqlkit@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@blendsdk/sqlkit/-/sqlkit-1.1.4.tgz#ffeea3ae46b44464acb18566ba4beca8bacbd188"
-  integrity sha512-vMghOzb0fgCsz0BX4s2+tKhoiuxk1BhZKWq40PC3mvfMtTujb9kFCQu/bRxus9FdlIbhMpVlz23rsFMP1cJeyw==
+"@blendsdk/sqlkit@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@blendsdk/sqlkit/-/sqlkit-1.1.8.tgz#69b988feebc9c65aa37569fbdbe198d40a83be28"
+  integrity sha512-Vk0TAXP5D+0qMYGY/O3obeeGSX6QS5mjI8YB4DcQBHg3fDcMpvfEhbbJw9OHYVW4Nn1Mkkf234A0VavTJKv87g==
   dependencies:
-    "@blendsdk/stdlib" "^1.1.4"
+    "@blendsdk/stdlib" "^1.1.8"
     "@types/pg" "^7.11.0"
     "@types/yesql" "^3.2.1"
     pg "^7.12.1"
@@ -187,10 +204,10 @@
     winston "^3.2.1"
     yesql "^3.2.2"
 
-"@blendsdk/stdlib@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@blendsdk/stdlib/-/stdlib-1.1.4.tgz#0b140bb01a8cf00ac6e435a0b2a0cdbfd0c24c53"
-  integrity sha512-mR+X4F7o9+9v/XRp2ItnWt5RtstMR3M4YnDMrJ9n+/NNl79lMtsY8G9ABfzUeoqUJoI3kQs1fm2phfaXy+RrbA==
+"@blendsdk/stdlib@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@blendsdk/stdlib/-/stdlib-1.1.8.tgz#06eb631c0dcf765c4ad992f4f92b10a6f28534ec"
+  integrity sha512-B4o8dp3AeXw8VhrgQPIKJinDYiOsad0v8TWYvQNosqBcGM87dodu6nofYhvcYi99oWZDEQFUF2pTuznrxgA74g==
   dependencies:
     "@types/mkdirp" "^0.5.2"
     mkdirp "^0.5.1"
@@ -1331,7 +1348,7 @@
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/jsonwebtoken@^8.3.3":
+"@types/jsonwebtoken@^8.3.3", "@types/jsonwebtoken@^8.3.4":
   version "8.3.4"
   resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.3.4.tgz#93c10c3d0a04bf31a507f89803e7df90a7a90889"
   integrity sha512-R0eiYPpbo6Jl/XtGwpg7vQlapd7D38gp0g9WMKOSFr/e2NUTN9Udd3ty7n+2yUpmHr2Fti+/BSc+KSQ8zPN+vg==
