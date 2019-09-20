@@ -1,21 +1,9 @@
-import { IDictionary } from "@blendsdk/stdlib";
+import { initializeServiceLocator, ILoggerService } from "@blendsdk/service";
 
-class ServiceLocator {
-    protected domains: string[] = [];
-    protected services: IDictionary = {};
+const services = initializeServiceLocator({
+    logger: "@blendsdk/winston-logger"
+});
 
-    public discover(domain?: string | string[]) {
-        console.log(process.cwd());
-    }
+const logger: ILoggerService = services.get<ILoggerService>("logger");
 
-    public getLogger() {}
-}
-
-let serviceLocator: ServiceLocator;
-
-export function initializeServiceLocator(domain: string | string[]) {
-    if (!serviceLocator) {
-        serviceLocator = new ServiceLocator();
-    }
-    return serviceLocator;
-}
+export { services, logger };

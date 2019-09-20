@@ -1,4 +1,4 @@
-export interface IILoggerServiceService {
+export interface ILoggerService {
     /**
      * Writes an error log
      *
