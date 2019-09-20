@@ -15,4 +15,5 @@ export interface IConfig {
     SMTP_USERNAME: string;
     SMTP_PASSWORD: string;
     SMTP_SECURE: boolean;
+    ACCESS_ORIGIN: any;
 }
