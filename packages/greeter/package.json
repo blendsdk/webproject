@@ -1,0 +1,17 @@
+{
+  "name": "@blendsdk/greeter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint -p ./tsconfig.json --fix",
+    "build": "rm -fR ./dist ./temp && tsc && yarn lint",
+    "watch": "rm -fR ./dist && tsc -w ",
+    "test": "jest --detectOpenHandles"
+  },  
+  "dependencies": {
+    "@blendsdk/stdlib": "^1.1.8",
+    "@blendsdk/service": "^1.0.0"
+  }
+}
