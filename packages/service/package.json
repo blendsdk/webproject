@@ -1,15 +1,16 @@
 {
   "name": "@blendsdk/service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "private": true,
   "license": "MIT",
   "scripts": {
     "lint": "tslint -p ./tsconfig.json --fix",
     "build": "rm -fR ./dist ./temp && tsc && yarn lint",
     "watch": "rm -fR ./dist && tsc -w ",
-    "test": "jest --detectOpenHandles"
-  },  
+    "test": "jest --detectOpenHandles --passWithNoTests"
+  },
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@blendsdk/stdlib": "^1.1.8"
   }

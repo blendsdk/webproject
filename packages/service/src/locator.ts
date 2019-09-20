@@ -1,16 +1,9 @@
 import { IDictionary } from "@blendsdk/stdlib";
+import { IService } from "./types/service";
 
-export interface IServiceLocatorConfig extends IDictionary {
-
-}
-
-interface IService {
-
-    initializeService(services: ServiceLocator): any;
-}
+export interface IServiceLocatorConfig extends IDictionary {}
 
 export class ServiceLocator {
-
     protected config: IServiceLocatorConfig;
 
     protected services: IDictionary = {};

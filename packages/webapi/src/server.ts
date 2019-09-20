@@ -1,6 +1,9 @@
 import errorHandler from "errorhandler";
+import { initializeServiceLocator } from "./services";
 import { logger } from "./logger";
 import { logger as globalLogger } from "@blendsdk/express";
+
+initializeServiceLocator(["@virtuo"]);
 
 /**
  * Make sure the HTTP response stack has a logger
