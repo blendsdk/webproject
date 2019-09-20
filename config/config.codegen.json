@@ -1,6 +1,5 @@
 {
     "CODE_GEN_DBTYPES": [
-        "temp/dbtypes.ts",
-        "temp/types2.ts"
+        "packages/database/src/dbtypes.ts"
     ]
 }

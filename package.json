@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna clean -y && lerna bootstrap",
-    "build": "lerna run build --stream",
+    "build:codegen":"lerna run build --scope codegen",
+    "build": "yarn build:codegen && lerna run build --stream --ignore codegen",
     "test": "lerna run test --stream"
   },
   "repository": {
