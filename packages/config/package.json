@@ -1,5 +1,5 @@
 {
-  "name": "@blendsdk/webapi-service",
+  "name": "@blendsdk/webapi-config",
   "version": "1.0.0",
   "main": "dist/index.js",
   "private": true,
@@ -12,6 +12,7 @@
   },
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@blendsdk/stdlib": "^1.1.8"
+    "@blendsdk/stdlib": "^1.1.8",
+    "@blendsdk/webapi-service": "^1.0.0"
   }
 }

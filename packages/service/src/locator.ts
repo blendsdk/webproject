@@ -1,7 +1,8 @@
 import { IDictionary } from "@blendsdk/stdlib";
-import { IService } from "./types/service";
 
-export interface IServiceLocatorConfig extends IDictionary {}
+export interface IServiceLocatorConfig {
+    [name: string]: (locator: ServiceLocator) => any;
+}
 
 export class ServiceLocator {
     protected config: IServiceLocatorConfig;
@@ -13,7 +14,11 @@ export class ServiceLocator {
     }
 
     protected loadService(name: string) {
-        this.services[name] = (require(this.config[name]) as IService).initializeService(this);
+        if (this.config[name]) {
+            this.services[name] = this.config[name](this);
+        } else {
+            throw new Error(`${name} is not a configured as a service!`);
+        }
     }
 
     public get<T>(name: string): T {

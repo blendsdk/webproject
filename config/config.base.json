@@ -1,5 +1,6 @@
 {
     "PORT": 4000,
+    "DEBUG": false,
 
     "PG_HOST": "localhost",
     "PG_USER": "postgres",
