@@ -1,11 +1,13 @@
 import { initializeServiceLocator, ILoggerService, IConfigurationService } from "@blendsdk/webapi-service";
 import { ConfigurationService } from "@blendsdk/webapi-config";
 import { WinstonLoggerService } from "@blendsdk/webapi-winston-logger";
+import { initializeDatabaseConnection } from "@blendsdk/webapi-database";
 import { fromRoot } from "./fromroot";
 import { IConfig } from "../types";
 
 const WEBAPI_LOGGER_SERVICE = "WEBAPI_LOGGER_SERVICE";
 const WEBAPI_CONFIG_SERVICE = "WEBAPI_CONFIG_SERVICE";
+const WEBAPI_DATABASE_CONNECTION_SERVICE = "WEBAPI_DATABASE_CONNECTION_SERVICE";
 
 const services = initializeServiceLocator({
     [WEBAPI_CONFIG_SERVICE]: () => {
@@ -29,6 +31,9 @@ const services = initializeServiceLocator({
                 }
             ]
         });
+    },
+    [WEBAPI_DATABASE_CONNECTION_SERVICE]: () => {
+        return initializeDatabaseConnection(configService, loggerService);
     }
 });
 
@@ -42,4 +47,6 @@ const configService: IConfigurationService<IConfig> = services.get<IConfiguratio
 
 const loggerService: ILoggerService = services.get<ILoggerService>(WEBAPI_LOGGER_SERVICE);
 
-export { services, loggerService, configService };
+const databaseService: any = services.get(WEBAPI_DATABASE_CONNECTION_SERVICE);
+
+export { services, loggerService, configService, databaseService };

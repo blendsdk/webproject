@@ -21,7 +21,7 @@
         "watch-ts": "tsc -w",
         "tslint": "tslint -p tsconfig.json --fix",
         "debug": "yarn build && yarn watch-debug",
-        "serve-debug": "nodemon --inspect ./dist/server.js",
+        "serve-debug": "nodemon --delay 3 --watch ../ --inspect ./dist/server.js",
         "watch-debug": "yarn build && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn serve-debug\""
     },
     "dependencies": {
@@ -30,6 +30,7 @@
         "@blendsdk/schemakit": "^1.1.8",
         "@blendsdk/webapi-service": "^1.0.0",
         "@blendsdk/webapi-config": "^1.0.0",
+        "@blendsdk/webapi-database": "^1.0.0",
         "@blendsdk/webapi-winston-logger": "^1.0.0",
         "@blendsdk/sqlkit": "^1.1.8",
         "@blendsdk/stdlib": "^1.1.8",

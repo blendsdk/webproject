@@ -1,6 +1,5 @@
 import { loggerService, configService } from "./utils/services";
 import { Server } from "http";
-
 import app from "./app";
 
 let server: Server = null;
