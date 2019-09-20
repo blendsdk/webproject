@@ -1,19 +1,7 @@
-if (!process.env.NODE_ENV) {
-    process.env.NODE_ENV = "development";
-}
-
-import errorHandler from "errorhandler";
 import { loggerService, configService } from "./utils/services";
 import { Server } from "http";
 
 import app from "./app";
-
-/**
- * Error Handler. Provides full stack - remove for production
- */
-if (process.env.NODE_ENV === "development") {
-    app.use(errorHandler());
-}
 
 let server: Server = null;
 

@@ -1,11 +1,11 @@
 import chalk from "chalk";
 import * as path from "path";
-import { asyncForEach, wrapInArray } from "@blendsdk/stdlib";
+import { asyncForEach, wrapInArray, ensureFilePath } from "@blendsdk/stdlib";
 import { generateInterfacesFromTables, generateDataAccessLayer } from "@blendsdk/codekit";
 import { createConnection, closeConnection } from "@blendsdk/sqlkit";
 import { database } from "../dbschema";
-import { loadConfiguration } from "@blendsdk/express";
 import { fromRoot } from "./utils";
+import { ConfigurationService } from "@blendsdk/webapi-config";
 
 interface IConfig {
     PG_HOST?: string;
@@ -13,10 +13,10 @@ interface IConfig {
     CODE_GEN_DBTYPES?: string | string[];
 }
 
-const config = loadConfiguration<IConfig>([
+const config = new ConfigurationService<IConfig>([
     fromRoot("config", "config.base.json"),
     fromRoot("config", "config.codegen.json")
-]);
+]).getConfig();
 
 const command = process.argv[2] || "";
 
@@ -60,6 +60,7 @@ function generateDatabaseTypes() {
     wrapInArray<string>(config.CODE_GEN_DBTYPES || []).forEach(fileName => {
         fileName = fromRoot(fileName);
         console.log(chalk.green("Generating Database Types: " + fileName));
+        ensureFilePath(fileName);
         generateInterfacesFromTables(fileName, database.getTables());
     });
 }
