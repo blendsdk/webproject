@@ -10,7 +10,7 @@
     "lint": "tslint -p ./tsconfig.json --fix",
     "build": "rm -fR ./dist ./temp && tsc && yarn lint",
     "watch": "rm -fR ./dist && tsc -w ",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles --passWithNoTests"
   },
   "dependencies": {
     "@blendsdk/sqlkit": "^1.1.8",

@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "@blendsdk/codekit": "^1.1.8",
-        "@blendsdk/express": "^1.1.9",
+        "@blendsdk/express": "^1.1.10",
         "@blendsdk/schemakit": "^1.1.8",
         "@blendsdk/webapi-service": "^1.0.0",
         "@blendsdk/webapi-config": "^1.0.0",
