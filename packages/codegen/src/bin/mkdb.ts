@@ -14,8 +14,10 @@ interface IConfig {
 }
 
 const config = new ConfigurationService<IConfig>([
-    fromRoot("config", "config.base.json"),
-    fromRoot("config", "config.codegen.json")
+    fromRoot("config", "config.base.js"),
+    fromRoot("config", "config.%NODE_ENV%.js"),
+    fromRoot("config", ".config.local.js"),
+    fromRoot("config", "config.codegen.js")
 ]).getConfig();
 
 const command = process.argv[2] || "";

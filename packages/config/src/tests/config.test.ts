@@ -9,7 +9,7 @@ interface IConfig {
 }
 
 test("single config", () => {
-    const config = new ConfigurationService<IConfig>("./src/tests/assets/config1.json").getConfig();
+    const config = new ConfigurationService<IConfig>("./src/tests/assets/config1.js").getConfig();
     expect(config.db_host).toEqual("db1");
     expect(config.db_password).toEqual("secret");
     expect(config.api).toEqual("api.local");
@@ -18,8 +18,8 @@ test("single config", () => {
 
 test("multi config", () => {
     const config = new ConfigurationService<IConfig>([
-        "./src/tests/assets/config1.json",
-        "./src/tests/assets/config2.json"
+        "./src/tests/assets/config1.js",
+        "./src/tests/assets/config2.js"
     ]).getConfig();
     expect(config.db_host).toEqual("db1");
     expect(config.db_password).toEqual("secret");
@@ -27,6 +27,6 @@ test("multi config", () => {
 });
 
 test("simgle env", () => {
-    const config = new ConfigurationService<IConfig>(["./src/tests/assets/config.%NODE_ENV%.json"]).getConfig();
+    const config = new ConfigurationService<IConfig>(["./src/tests/assets/config.%NODE_ENV%.js"]).getConfig();
     expect(config.hello).toEqual("world");
 });

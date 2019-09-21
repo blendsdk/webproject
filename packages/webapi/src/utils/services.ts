@@ -12,9 +12,9 @@ const WEBAPI_DATABASE_CONNECTION_SERVICE = "WEBAPI_DATABASE_CONNECTION_SERVICE";
 const services = initializeServiceLocator({
     [WEBAPI_CONFIG_SERVICE]: () => {
         return new ConfigurationService<IConfig>([
-            fromRoot("config", "config.base.json"),
-            fromRoot("config", "config.%NODE_ENV%.json"),
-            fromRoot("config", ".config.local.json")
+            fromRoot("config", "config.base.js"),
+            fromRoot("config", "config.%NODE_ENV%.js"),
+            fromRoot("config", ".config.local.js")
         ]);
     },
     [WEBAPI_LOGGER_SERVICE]: () => {

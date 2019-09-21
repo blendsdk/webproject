@@ -1,5 +1,5 @@
-{
-    "CODE_GEN_DBTYPES": [
+module.export = {
+    CODE_GEN_DBTYPES: [
         "packages/database/src/dbtypes.ts"
     ]
 }

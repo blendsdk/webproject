@@ -44,9 +44,8 @@ export class ConfigurationService<T> implements IConfigurationService<T> {
         wrapInArray<string>(files || []).forEach(file => {
             file = applyVariables(file, process.env);
             if (fs.existsSync(file)) {
-                const contents = JSON.parse(
-                    applyVariables(fs.readFileSync(file, "utf8").toString(), process.env || {})
-                );
+                // tslint:disable-next-line: no-eval
+                const contents = eval(applyVariables(fs.readFileSync(file, "utf8").toString(), process.env || {}));
                 result = apply(result, contents, { overwrite: true, mergeArrays: true });
             } else {
                 console.log(`Skipping ${file}! Not found.`);
