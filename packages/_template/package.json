@@ -1,0 +1,19 @@
+{
+  "name": "@blendsdk/_template",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint -p ./tsconfig.json --fix",
+    "build": "rm -fR ./dist ./temp && tsc && yarn lint",
+    "watch": "rm -fR ./dist && tsc -w ",
+    "test": "jest --detectOpenHandles --passWithNoTests"
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@blendsdk/stdlib": "^1.1.8",
+    "@blendsdk/webapi-service": "^1.0.0",
+    "@blendsdk/webapi-database": "^1.0.0"
+  }
+}
