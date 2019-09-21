@@ -2,7 +2,7 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import * as path from "path";
 import bodyParser = require("body-parser");
 import lusca = require("lusca");
-import { loggerService, configService } from "../utils";
+import { loggerService, configService } from ".";
 import { getParameters } from "@blendsdk/express";
 import compression from "compression";
 import bearerToken from "express-bearer-token";
@@ -14,7 +14,7 @@ import cors from "cors";
  * @export
  * @param {Application} app
  */
-export function initWebServer(app: Application) {
+export function initWebApplication(app: Application) {
     app.set("views", path.join(process.cwd(), "views"));
     app.set("view engine", "ejs");
     app.use(compression());

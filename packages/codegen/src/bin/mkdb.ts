@@ -11,6 +11,7 @@ interface IConfig {
     PG_HOST?: string;
     PG_DATABASE?: string;
     CODE_GEN_DBTYPES?: string | string[];
+    CODE_GEN_DATABASE_PACKAGE_ROOT: string;
 }
 
 const config = new ConfigurationService<IConfig>([
@@ -26,10 +27,13 @@ const command = process.argv[2] || "";
     switch (command) {
         case "--gen-types":
             generateDatabaseTypes();
+            generateDAL();
             break;
         case "--gen-database":
             generateDatabase();
             break;
+        case "--gen-routes":
+            generateRouters();
         default:
             console.log(chalk.yellow("No command specified! Use --gen-types or --gen-database"));
             break;
@@ -42,6 +46,22 @@ function showEnv() {
     console.log(`PG_DATABASE: ${chalk.green(config.PG_DATABASE)}`);
     console.log(`CODE_GEN_DBTYPES: ${chalk.green(wrapInArray(config.CODE_GEN_DBTYPES).join(", "))}`);
     console.log("-".repeat(80));
+}
+
+function generateRouters() {}
+
+function generateDAL() {
+    console.log(chalk.green("Creating DataAccessLayer"));
+    generateDataAccessLayer(database.getTables(), {
+        outDir: fromRoot(config.CODE_GEN_DATABASE_PACKAGE_ROOT, "src"),
+        tables: {
+            sys_user: {
+                select: false,
+                insert: false
+            }
+        }
+    });
+    console.log();
 }
 
 async function generateDatabase() {

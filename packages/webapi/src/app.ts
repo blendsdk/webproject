@@ -1,6 +1,6 @@
 import express from "express";
 import errorHandler from "errorhandler";
-import { initWebServer } from "./utils";
+import { initWebApplication, initWebModules } from "./utils";
 
 // Create Express server
 const app = express();
@@ -15,6 +15,10 @@ if (process.env.NODE_ENV === "development") {
 /**
  * Initializing the webserver
  */
-initWebServer(app);
+initWebApplication(app);
+/**
+ * Initializing the app modules
+ */
+initWebModules(app);
 
 export default app;
