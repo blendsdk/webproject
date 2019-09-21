@@ -4,10 +4,12 @@ import { WinstonLoggerService } from "@blendsdk/webapi-winston-logger";
 import { initializeDatabaseConnection } from "@blendsdk/webapi-database";
 import { fromRoot } from "./fromroot";
 import { IConfig } from "../types";
+import { initializeMailer, Mail } from "@blendsdk/webapi-smtpmail";
 
 const WEBAPI_LOGGER_SERVICE = "WEBAPI_LOGGER_SERVICE";
 const WEBAPI_CONFIG_SERVICE = "WEBAPI_CONFIG_SERVICE";
 const WEBAPI_DATABASE_CONNECTION_SERVICE = "WEBAPI_DATABASE_CONNECTION_SERVICE";
+const WEBAPI_SMTP_MAIL_SERVICE = "WEBAPI_SMTP_MAIL_SERVICE";
 
 const services = initializeServiceLocator({
     [WEBAPI_CONFIG_SERVICE]: () => {
@@ -34,6 +36,9 @@ const services = initializeServiceLocator({
     },
     [WEBAPI_DATABASE_CONNECTION_SERVICE]: () => {
         return initializeDatabaseConnection(configService, loggerService);
+    },
+    [WEBAPI_SMTP_MAIL_SERVICE]: () => {
+        return initializeMailer(configService, loggerService);
     }
 });
 
@@ -49,4 +54,6 @@ const loggerService: ILoggerService = services.get<ILoggerService>(WEBAPI_LOGGER
 
 const databaseService: any = services.get(WEBAPI_DATABASE_CONNECTION_SERVICE);
 
-export { services, loggerService, configService, databaseService };
+const mailerService: Mail = services.get(WEBAPI_SMTP_MAIL_SERVICE);
+
+export { services, loggerService, configService, databaseService, mailerService };

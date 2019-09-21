@@ -1,3 +1,3 @@
 import { Application } from "express";
 
-export function initWebModules(app: Application) {}
+export function initWebModules(_app: Application) {}
