@@ -1,4 +1,4 @@
-import { forEach, isArray, wrapInArray } from "@blendsdk/stdlib";
+import { forEach, wrapInArray } from "@blendsdk/stdlib";
 import errorHandler from "errorhandler";
 import express from "express";
 import { Application as Express } from "express-serve-static-core";
