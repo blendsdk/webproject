@@ -12,7 +12,7 @@
   },
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@blendsdk/stdlib": "^1.1.8",
+    "@blendsdk/stdlib": "^1.1.12",
     "@blendsdk/webapi-service": "^1.0.0",
     "@blendsdk/webapi-database": "^1.0.0",
     "nodemailer": "^6.3.0",

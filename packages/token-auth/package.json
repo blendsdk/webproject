@@ -12,8 +12,12 @@
   },
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@blendsdk/stdlib": "^1.1.8",
+    "@blendsdk/express": "^1.1.16",
+    "@blendsdk/stdlib": "^1.1.12",
+    "@blendsdk/webapi-database": "^1.0.0",
     "@blendsdk/webapi-service": "^1.0.0",
-    "@blendsdk/webapi-database": "^1.0.0"
+    "@types/jsonwebtoken": "^8.3.4",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1"
   }
 }

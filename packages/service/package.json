@@ -12,6 +12,9 @@
   },
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@blendsdk/stdlib": "^1.1.8"
+    "@blendsdk/stdlib": "^1.1.12",
+    "@types/nodemailer": "^6.2.1",
+    "@types/pg": "^7.11.1",
+    "@blendsdk/express": "^1.1.16"
   }
 }

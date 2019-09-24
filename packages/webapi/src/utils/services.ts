@@ -1,4 +1,9 @@
-import { initializeServiceLocator, ILoggerService, IConfigurationService } from "@blendsdk/webapi-service";
+import {
+    initializeServiceLocator,
+    ILoggerService,
+    IConfigurationService,
+    ICommonServices
+} from "@blendsdk/webapi-service";
 import { ConfigurationService } from "@blendsdk/webapi-config";
 import { WinstonLoggerService } from "@blendsdk/webapi-winston-logger";
 import { initializeDatabaseConnection } from "@blendsdk/webapi-database";
@@ -55,5 +60,13 @@ const loggerService: ILoggerService = services.get<ILoggerService>(WEBAPI_LOGGER
 const databaseService: any = services.get(WEBAPI_DATABASE_CONNECTION_SERVICE);
 
 const mailerService: Mail = services.get(WEBAPI_SMTP_MAIL_SERVICE);
+
+export const commonServices: ICommonServices = {
+    configService,
+    loggerService,
+    databaseService,
+    mailerService,
+    serviceLocator: services
+};
 
 export { services, loggerService, configService, databaseService, mailerService };

@@ -2,11 +2,12 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import * as path from "path";
 import bodyParser = require("body-parser");
 import lusca = require("lusca");
-import { loggerService, configService } from ".";
+import { loggerService, configService, initWebModules } from ".";
 import { getParameters } from "@blendsdk/express";
 import compression from "compression";
 import bearerToken from "express-bearer-token";
 import cors from "cors";
+import helmet from "helmet";
 
 /**
  * Initializes common express middlewares.
@@ -15,6 +16,7 @@ import cors from "cors";
  * @param {Application} app
  */
 export function initWebApplication(app: Application) {
+    app.use(helmet());
     app.set("views", path.join(process.cwd(), "views"));
     app.set("view engine", "ejs");
     app.use(compression());
@@ -23,7 +25,20 @@ export function initWebApplication(app: Application) {
     app.use(lusca.xframe("SAMEORIGIN"));
     app.use(lusca.xssProtection(true));
     app.use(bearerToken());
-    app.use(cors(configService.getConfig().ACCESS_ORIGIN || { origin: "*" }));
+    app.use(
+        cors(
+            configService.getConfig().ACCESS_ORIGIN || {
+                origin: ["http://localhost:3000"],
+                methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+                credentials: true
+            }
+        )
+    );
+
+    /**
+     * Initializing the app modules
+     */
+    initWebModules(app);
 
     app.use(
         express.static(path.join(process.cwd(), "public"), {

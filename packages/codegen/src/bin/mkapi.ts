@@ -1,17 +1,27 @@
 import chalk from "chalk";
 import { generateRestFramework } from "@blendsdk/codekit";
-import { testApiSpec, apiSpec } from "../specs";
+import { tokenAuthSpec } from "../specs";
+import { fromRoot } from "./utils";
 
-console.log(chalk.green("Creating Routes"));
-generateRestFramework(apiSpec, {
-    routerOutFile: "src/routes.ts",
-    routerTypesOutFile: "src/common/api_types.ts",
-    clientOutFile: "../client1/src/api/client.ts",
-    clientTypesOutFile: "../client1/src/api/api_types.ts"
-});
-generateRestFramework(testApiSpec, {
-    routerOutFile: "src/tests/routes.ts",
-    routerTypesOutFile: "src/tests/test_api_types.ts",
-    clientOutFile: "../temp/test/client.ts",
-    clientTypesOutFile: "../test/temp/api_types.ts"
-});
+const command = process.argv[2] || "";
+
+(async () => {
+    switch (command) {
+        case "--gen-routes":
+            generateRoutes();
+            break;
+        default:
+            console.log(chalk.yellow("No command specified! Use --gen-routes"));
+            break;
+    }
+})();
+
+function generateRoutes() {
+    console.log(chalk.green("Creating TokenAuthentication API"));
+    generateRestFramework(tokenAuthSpec, {
+        routerOutFile: fromRoot("packages/token-auth/src/routes.ts"),
+        routerTypesOutFile: fromRoot("packages/token-auth/src/types/route_types.ts"),
+        clientOutFile: fromRoot("temp/src/api/client.ts"),
+        clientTypesOutFile: fromRoot("temp/src/api/api_types.ts")
+    });
+}
