@@ -6,16 +6,10 @@ import { Server } from "http";
 import Mail from "nodemailer/lib/mailer";
 import { ApplicationConfiguration } from "../modules/configuration/Configuration";
 import { IRuntimeConfig } from "../modules/configuration/Types";
+import { MODULE_CONFIGURATION, MODULE_LOGGER, MODULE_MAILER, MODULE_ROUTE_BUILDER, TModule } from "../modules/constants";
 import { ILogger } from "../modules/logger/ILogger";
 import { createDefaultFileLogger } from "../modules/logger/winston/DefaultLogger";
 import { RouteBuilder } from "../modules/routebuilder/RouteBuilder";
-
-export type TModule = (app: Application) => { id: string; module: any } | void;
-
-export const MODULE_LOGGER = "MODULE_LOGGER";
-export const MODULE_MAILER = "MODULE_MAILER";
-export const MODULE_CONFIGURATION = "MODULE_CONFIGURATION";
-export const MODULE_ROUTE_BUILDER = "MODULE_ROUTE_BUILDER";
 
 /**
  * Interface for configuring the Application
