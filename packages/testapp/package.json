@@ -1,0 +1,26 @@
+{
+  "name": "@blendsdk/testapp",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn serve",
+    "build": "yarn build-ts && yarn tslint",
+    "serve": "node ./dist/server.js",
+    "watch-node": "nodemon ./dist/index.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn watch-node\"",
+    "test": "cross-env NODE_ENV=test && jest --detectOpenHandles --runInBand --passWithNoTests --forceExit",
+    "watch-test": "yarn test -- --watchAll",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "tslint": "tslint -p tsconfig.json --fix",
+    "debug": "yarn build && yarn watch-debug",
+    "serve-debug": "nodemon --delay 3 --watch ../ --inspect ./dist/index.js",
+    "watch-debug": "yarn build && concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"yarn watch-ts\" \"yarn serve-debug\""
+},
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@blendsdk/webafx": "1.0.0"
+  }
+}
