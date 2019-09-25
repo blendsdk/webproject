@@ -1,6 +1,6 @@
 import { ensureFilePath } from "@blendsdk/stdlib";
 import * as path from "path";
-import { Application } from "../../application/Application";
+import { Application } from "../../../application/Application";
 import { IRuntimeConfig } from "../../configuration/Types";
 import { ILogger } from "../ILogger";
 import { WinstonFileLogger } from "./WinstonFileLogger";

@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
-import { Application } from "../application/Application";
+import { Application } from "../../application/Application";
 import { IRuntimeConfig } from "../configuration/Types";
 
 /**

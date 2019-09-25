@@ -1,4 +1,4 @@
-import { ApplicationConfiguration } from "../configuration/Configuration";
+import { ApplicationConfiguration } from "../modules/configuration/Configuration";
 
 interface IConfig {
     db_host?: string;

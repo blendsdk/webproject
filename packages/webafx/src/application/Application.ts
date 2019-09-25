@@ -1,19 +1,21 @@
-import { forEach, wrapInArray } from "@blendsdk/stdlib";
+import { forEach, isFunction, wrapInArray } from "@blendsdk/stdlib";
 import errorHandler from "errorhandler";
 import express from "express";
 import { Application as Express } from "express-serve-static-core";
 import { Server } from "http";
 import Mail from "nodemailer/lib/mailer";
-import { ApplicationConfiguration } from "../configuration/Configuration";
-import { IRuntimeConfig } from "../configuration/Types";
-import { ILogger } from "../logger/ILogger";
-import { createDefaultFileLogger } from "../logger/winston/DefaultLogger";
+import { ApplicationConfiguration } from "../modules/configuration/Configuration";
+import { IRuntimeConfig } from "../modules/configuration/Types";
+import { ILogger } from "../modules/logger/ILogger";
+import { createDefaultFileLogger } from "../modules/logger/winston/DefaultLogger";
+import { RouteBuilder } from "../modules/routebuilder/RouteBuilder";
 
 export type TModule = (app: Application) => { id: string; module: any } | void;
 
 export const MODULE_LOGGER = "MODULE_LOGGER";
 export const MODULE_MAILER = "MODULE_MAILER";
 export const MODULE_CONFIGURATION = "MODULE_CONFIGURATION";
+export const MODULE_ROUTE_BUILDER = "MODULE_ROUTE_BUILDER";
 
 /**
  * Interface for configuring the Application
@@ -114,7 +116,7 @@ export class Application {
     protected loadDefaultModules() {
         this.modules[MODULE_CONFIGURATION] = new ApplicationConfiguration(this.config.configFiles || []);
         this.modules[MODULE_LOGGER] = (this.config.logger || createDefaultFileLogger)(this);
-
+        this.modules[MODULE_ROUTE_BUILDER] = new RouteBuilder(this);
         if (this.config.mailer) {
             this.modules[MODULE_MAILER] = this.config.mailer(this);
         }
@@ -137,8 +139,11 @@ export class Application {
                 }
             }
         });
-        forEach(this.modules, (_module, id) => {
+        forEach(this.modules, (module: any, id) => {
             me.getLogger().info(`Module ${id} is loaded.`);
+            if (module && module.init && isFunction(module.init)) {
+                (module as any).init();
+            }
         });
     }
 
