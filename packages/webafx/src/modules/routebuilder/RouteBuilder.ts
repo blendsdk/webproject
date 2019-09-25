@@ -1,5 +1,5 @@
 import { response, TRequestHandler } from "@blendsdk/express";
-import { isClass, isNullOrUndefDefault, isObject, TClass, TFunction, wrapInArray } from "@blendsdk/stdlib";
+import { isNullOrUndefDefault, isObject, TClass, TFunction, wrapInArray } from "@blendsdk/stdlib";
 import { NextFunction, Request, Response } from "express";
 import { RequestHandler } from "express-serve-static-core";
 import { check, ValidationChain, validationResult } from "express-validator";
@@ -54,6 +54,13 @@ function routeParameter(route: IRoute): RequestHandler {
     };
 }
 
+/**
+ * Module to building routes based on one or more
+ * IRoute definition.
+ *
+ * @export
+ * @class RouteBuilder
+ */
 export class RouteBuilder {
 
     protected routes: IRoute[];
@@ -64,6 +71,14 @@ export class RouteBuilder {
         this.app = app;
     }
 
+    /**
+     * Gets the authentication middleware if it is registrered.
+     *
+     * @protected
+     * @param {IRoute} route
+     * @returns {TFunction}
+     * @memberof RouteBuilder
+     */
     protected getAuthenticationMiddleware(route: IRoute): TFunction {
         const noHandler = () => {
             throw new Error(`No authentication handler module was found for endpoint: ${route.endpoint}`);
@@ -72,7 +87,7 @@ export class RouteBuilder {
     }
 
     /**
-     * Builda route handler for a given route
+     * Builds a route handler for a given route
      *
      * @protected
      * @param {IRoute} route
@@ -114,7 +129,7 @@ export class RouteBuilder {
      */
     protected getRequestHandler(controller: TRouteController): TFunction {
         const me = this;
-        if (isClass(controller)) {
+        if (controller && controller.prototype && controller.prototype.handleRequest) {
             const classInstance = new ((controller as any) as TClass)(me.app);
             return (...args: any): Promise<any> => {
                 return classInstance.handleRequest(...args);

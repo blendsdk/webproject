@@ -9,7 +9,23 @@ import { IRuntimeConfig } from "../modules/configuration/Types";
 import { MODULE_CONFIGURATION, MODULE_LOGGER, MODULE_MAILER, MODULE_ROUTE_BUILDER, TModule } from "../modules/constants";
 import { ILogger } from "../modules/logger/ILogger";
 import { createDefaultFileLogger } from "../modules/logger/winston/DefaultLogger";
-import { RouteBuilder } from "../modules/routebuilder/RouteBuilder";
+import { RouteBuilder, IRoute } from "../modules/routebuilder";
+
+/**
+ * Create a module from a function or an object
+ *
+ * @export
+ * @param {string} id
+ * @param {*} module
+ * @returns
+ */
+export function makeModule(id: string, module: any) {
+    return () => {
+        return {
+            id, module
+        }
+    }
+}
 
 /**
  * Interface for configuring the Application
@@ -46,7 +62,7 @@ export interface IApplicationConfig {
      * @type {TModule[]}
      * @memberof IApplicationConfig
      */
-    modules?: TModule[];
+    modules?: TModule| TModule[];
 }
 
 /**
@@ -139,6 +155,7 @@ export class Application {
                 (module as any).init();
             }
         });
+        this.getModule<RouteBuilder>(MODULE_ROUTE_BUILDER).initializeRoutes();
     }
 
     /**
@@ -179,6 +196,16 @@ export class Application {
             server: this.server,
             app: this.expressApp
         };
+    }
+
+    /**
+     * Adds one or more routes to this application.
+     *
+     * @param {(IRoute|IRoute[])} route
+     * @memberof Application
+     */
+    public addRoute(route: IRoute | IRoute[]) {
+        this.getModule<RouteBuilder>(MODULE_ROUTE_BUILDER).addRoute(route);
     }
 
     /**
