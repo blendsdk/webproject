@@ -12,7 +12,7 @@ import { WinstonFileLogger } from "./WinstonFileLogger";
  * @param {Application} self
  * @returns {ILogger}
  */
-export function createDefaultFileLogger(self: Application): ILogger {
+export function DefaultFileLogger(self: Application): ILogger {
     const logDir = path.resolve(
         self.getConfig<IRuntimeConfig>().LOG_DIR || ensureFilePath(path.join(process.cwd(), "logs"))
     );

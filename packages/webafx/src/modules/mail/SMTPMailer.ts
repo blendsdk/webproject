@@ -10,7 +10,7 @@ import { IRuntimeConfig } from "../configuration/Types";
  * @param {Application} app
  * @returns {Mail}
  */
-export function createDefaultSMTPMailer(app: Application): Mail {
+export function DefaultSMTPMailer(app: Application): Mail {
     const config = app.getConfig<IRuntimeConfig>();
     app.getLogger().info(`Configuring SMTPMailer to ${config.SMTP_HOST}`);
     const smtpConfig = {

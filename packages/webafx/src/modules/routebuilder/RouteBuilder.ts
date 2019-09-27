@@ -7,14 +7,15 @@ import { Application } from "../../application/Application";
 import { MODULE_ROUTE_AUTHENTICATION_MIDDLEWARE } from "../constants";
 import { IRoute, IRouteParameter, TRequestHandlerFunction, TRouteController } from "./Types";
 
+const INJ_APPLICATION = "INJ_APPLICATION";
+
 /**
  * Higher order function for providing field validation check.
  *
- * @export
  * @param {TRequestHandler} callback
  * @returns {Function}
  */
-export function withRequestValidation(callback: TRequestHandler): RequestHandler {
+function withRequestValidation(callback: TRequestHandler): RequestHandler {
     return (req: Request, res: Response) => {
         try {
             const errors = validationResult(req);
@@ -55,6 +56,25 @@ function routeParameter(route: IRoute): RequestHandler {
 }
 
 /**
+ * Middleware to inject an object into the Request
+ *
+ * @exports
+ * @param {string} name
+ * @param {*} obj
+ * @returns
+ */
+export function objectInjector(name: string, obj: any) {
+    return (req: Request, _res: Response, next: NextFunction) => {
+        req[name] = obj;
+        next();
+    };
+}
+
+export function getApplication(req: Request): Application {
+    return req[INJ_APPLICATION] as Application;
+}
+
+/**
  * Module to building routes based on one or more
  * IRoute definition.
  *
@@ -62,7 +82,6 @@ function routeParameter(route: IRoute): RequestHandler {
  * @class RouteBuilder
  */
 export class RouteBuilder {
-
     protected routes: IRoute[];
     protected app: Application;
 
@@ -72,7 +91,7 @@ export class RouteBuilder {
     }
 
     /**
-     * Gets the authentication middleware if it is registrered.
+     * Gets the authentication middleware if it is registered.
      *
      * @protected
      * @param {IRoute} route
@@ -95,7 +114,8 @@ export class RouteBuilder {
      * @memberof RouteBuilder
      */
     protected buildRouteHandlers(route: IRoute): RequestHandler[] {
-        const me = this, result: RequestHandler[] = [routeParameter(route)];
+        const me = this,
+            result: RequestHandler[] = [objectInjector(INJ_APPLICATION, this.app), routeParameter(route)];
         route.authenticated = isNullOrUndefDefault(route.authenticated, false);
         route.parameters = route.parameters || {};
         // check if secure is needed
@@ -116,7 +136,9 @@ export class RouteBuilder {
         });
         // adds the validation middle ware
         const requestHandler = me.getRequestHandler(route.controller);
-        result.push(Object.keys(route.parameters).length === 0 ? requestHandler : withRequestValidation(requestHandler));
+        result.push(
+            Object.keys(route.parameters).length === 0 ? requestHandler : withRequestValidation(requestHandler)
+        );
         return result;
     }
 

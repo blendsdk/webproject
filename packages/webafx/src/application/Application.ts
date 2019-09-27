@@ -1,4 +1,6 @@
 import { forEach, isFunction, wrapInArray } from "@blendsdk/stdlib";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 import errorHandler from "errorhandler";
 import express from "express";
 import { Application as Express } from "express-serve-static-core";
@@ -6,10 +8,16 @@ import { Server } from "http";
 import Mail from "nodemailer/lib/mailer";
 import { ApplicationConfiguration } from "../modules/configuration/Configuration";
 import { IRuntimeConfig } from "../modules/configuration/Types";
-import { MODULE_CONFIGURATION, MODULE_LOGGER, MODULE_MAILER, MODULE_ROUTE_BUILDER, TModule } from "../modules/constants";
+import {
+    MODULE_CONFIGURATION,
+    MODULE_LOGGER,
+    MODULE_MAILER,
+    MODULE_ROUTE_BUILDER,
+    TModule
+} from "../modules/constants";
 import { ILogger } from "../modules/logger/ILogger";
-import { createDefaultFileLogger } from "../modules/logger/winston/DefaultLogger";
-import { RouteBuilder, IRoute } from "../modules/routebuilder";
+import { DefaultFileLogger } from "../modules/logger/winston/DefaultLogger";
+import { IRoute, RouteBuilder } from "../modules/routebuilder";
 
 /**
  * Create a module from a function or an object
@@ -22,9 +30,10 @@ import { RouteBuilder, IRoute } from "../modules/routebuilder";
 export function makeModule(id: string, module: any) {
     return () => {
         return {
-            id, module
-        }
-    }
+            id,
+            module
+        };
+    };
 }
 
 /**
@@ -62,7 +71,7 @@ export interface IApplicationConfig {
      * @type {TModule[]}
      * @memberof IApplicationConfig
      */
-    modules?: TModule| TModule[];
+    modules?: TModule | TModule[];
 }
 
 /**
@@ -125,11 +134,14 @@ export class Application {
      */
     protected loadDefaultModules() {
         this.modules[MODULE_CONFIGURATION] = new ApplicationConfiguration(this.config.configFiles || []);
-        this.modules[MODULE_LOGGER] = (this.config.logger || createDefaultFileLogger)(this);
+        this.modules[MODULE_LOGGER] = (this.config.logger || DefaultFileLogger)(this);
         this.modules[MODULE_ROUTE_BUILDER] = new RouteBuilder(this);
         if (this.config.mailer) {
             this.modules[MODULE_MAILER] = this.config.mailer(this);
         }
+        this.expressApp.use(bodyParser.json());
+        this.expressApp.use(bodyParser.urlencoded({ extended: true }));
+        this.expressApp.use(cookieParser());
     }
 
     protected loadModules() {

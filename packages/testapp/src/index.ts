@@ -1,6 +1,5 @@
-import { Application, createDefaultSMTPMailer, makeModule } from "@blendsdk/webafx";
-import { testModule } from './testmodule';
-import { MODULE_ROUTE_AUTHENTICATION_MIDDLEWARE } from '@blendsdk/webafx/dist/modules/constants';
+import { Application, AuthenticationProvider, DefaultSMTPMailer } from "@blendsdk/webafx";
+import { authenticationModule } from "./modules/authentication";
 
 const configFiles: string[] = [
     "../../config/config.base.js",
@@ -10,13 +9,8 @@ const configFiles: string[] = [
 
 const { server, app } = new Application({
     configFiles,
-    mailer: createDefaultSMTPMailer,
-    modules:[
-        testModule,
-        makeModule(MODULE_ROUTE_AUTHENTICATION_MIDDLEWARE,function(_a:any,_b:any,c:any) {
-                    c();
-                })
-    ]
+    mailer: DefaultSMTPMailer,
+    modules: [AuthenticationProvider, authenticationModule]
 }).run();
 
 export { server, app };

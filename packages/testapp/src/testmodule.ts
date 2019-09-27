@@ -1,6 +1,6 @@
-import { Application, IRoute, } from "@blendsdk/webafx"
-import { Request, Response } from 'express'
-import { response, getParameters } from '@blendsdk/express'
+import { getParameters, response } from "@blendsdk/express";
+import { Application, IRoute, } from "@blendsdk/webafx";
+import { Request, Response } from "express";
 
 interface IGreetRequest {
     name: string;
@@ -12,22 +12,21 @@ interface IGreetResponse {
 
 async function GreetController(_req: Request, _res: Response) {
     const { name } = getParameters<IGreetRequest>(_req);
-    return response(_res).OK({ result: `Hello ${name}!` } as IGreetResponse)
+    return response(_res).OK({ result: `Hello ${name}!` } as IGreetResponse);
 }
-
 
 export function testModule(app: Application) {
 
     const route: IRoute = {
         endpoint: "/greet/:name/hello",
         controller: GreetController,
-        method:"get",
-        authenticated:true,
+        method: "get",
+        authenticated: true,
         parameters: {
             name: {
-                type:"string"
+                type: "string"
             }
         }
-    }    
+    };
     app.addRoute(route);
 }

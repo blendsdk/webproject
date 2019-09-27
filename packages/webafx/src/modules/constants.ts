@@ -1,4 +1,4 @@
-import { Application } from '../application/Application';
+import { Application } from "../application/Application";
 
 /**
  * Type describing a module configuration

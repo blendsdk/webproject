@@ -12,7 +12,7 @@ module.export = {
     STATIC_FILES_MAX_AGE: 31557600000,
 
     JWT_SECRET: "<put you key here>",
-    JWT_MAX_AGE: 54000,
+    JWT_EXPIRES_IN_SECONDS: 2 * 60,
 
     SMTP_HOST: "my.smtp.host",
     SMTP_PORT: 587,

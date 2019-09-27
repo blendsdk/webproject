@@ -39,14 +39,7 @@ export class WinstonFileLogger implements ILogger {
         if (config.console) {
             transports.push(
                 new winston.transports.Console({
-                    level: "debug",
-                    format: winston.format.combine(
-                        winston.format.timestamp(),
-                        winston.format.colorize(),
-                        winston.format.printf(info => {
-                            return `${info.timestamp} - ${info.level}: ${info.message}`;
-                        })
-                    )
+                    level: "debug"
                 })
             );
         }

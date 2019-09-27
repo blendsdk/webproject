@@ -9,7 +9,7 @@ export interface IRuntimeConfig {
     PORT: number;
     STATIC_FILES_MAX_AGE: number;
     JWT_SECRET: string;
-    JWT_MAX_AGE: number;
+    JWT_EXPIRES_IN_SECONDS: number;
     SMTP_HOST: string;
     SMTP_PORT: number;
     SMTP_USERNAME: string;

@@ -9,6 +9,7 @@
     "bootstrap": "lerna clean -y && lerna bootstrap",
     "build:codegen": "lerna run build --scope codegen",
     "build": "yarn build:codegen && lerna run build --stream --ignore codegen",
+    "build2": "lerna run build --stream --ignore codegen",
     "ncu":"lerna exec \"ncu -u\" && rm -fR node_modules yarn.lock && yarn install && yarn bootstrap && yarn build && yarn test",
     "test": "lerna run test --stream"
   },
