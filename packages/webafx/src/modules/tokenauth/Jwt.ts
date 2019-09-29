@@ -7,9 +7,12 @@ import { MODULE_ROUTE_AUTHENTICATION_MIDDLEWARE } from "../constants";
 import { decryptData, encryptData } from "./Encryption";
 import { IJWTConfig } from "./Types";
 
+/**
+ * Randomly generated token key
+ */
 export const TOKEN_KEY: string = Math.random()
-    .toString(36)
-    .substring(7);
+    .toString(12)
+    .substring(2);
 
 /**
  * Create and encode data as JWT
@@ -70,23 +73,46 @@ export function verifyJWTToken(token: string, config: IJWTConfig) {
     });
 }
 
+/**
+ * Gets the current authenticated user
+ *
+ * @export
+ * @template T
+ * @param {Request} req
+ * @returns
+ */
 export function getAuthenticatedUser<T>(req: Request) {
     return ((req as any).user || undefined) as T;
 }
 
+/**
+ * Gets the currently assigned token.
+ *
+ * @export
+ * @param {Request} req
+ * @param {string} [key]
+ * @returns
+ */
 export function getToken(req: Request, key?: string) {
     key = key || TOKEN_KEY;
     const params = getParameters<any>(req) || {};
     return params.TOKEN || params[TOKEN_KEY] || (req.cookies && req.cookies[TOKEN_KEY]) || undefined;
 }
 
+/**
+ * Token authentication provide module.
+ *
+ * @export
+ * @param {Application} app
+ * @returns
+ */
 export function AuthenticationProvider(app: Application) {
     return {
         id: MODULE_ROUTE_AUTHENTICATION_MIDDLEWARE,
         module: (req: Request, res: Response, next: NextFunction) => {
             verifyJWTToken(getToken(req), app.getConfig())
                 .then((decodedToken: any) => {
-                    (req as any).user = decodedToken.data;
+                    (req as any).user = decodedToken.data.user;
                     next();
                 })
                 .catch(() => {

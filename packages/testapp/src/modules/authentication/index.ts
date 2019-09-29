@@ -1,59 +1,15 @@
 import {
     Application,
     AuthenticationController,
-    getAuthenticatedUser,
+    CredentialsController,
     IRoute,
-    IUserValidatorResult,
-    NextFunction,
-    Request,
-    Response,
-    response
+    IUserValidatorResult
 } from "@blendsdk/webafx";
 
 interface IAuthenticationRequest {
     username: string;
     password: string;
     language?: string;
-}
-
-// interface IAuthenticationResponse {
-//     success: boolean;
-//     token: string;
-// }
-
-// async function LoginController(_req: Request, _res: Response) {
-//     const { username, password } = getParameters<IAuthenticationRequest>(_req),
-//         app = getApplication(_req);
-//     if (username === "user1" && password === "secret") {
-//         const token = createJWToken(
-//             {
-//                 username,
-//                 claims: ["ADMIN"]
-//             },
-//             app.getConfig()
-//         );
-//         const expDate = new Date();
-//         expDate.setMinutes(expDate.getMinutes() + 60);
-//         _res.cookie(TOKEN_KEY, token, { httpOnly: true, expires: expDate });
-//         return response(_res).OK({
-//             success: true
-//         });
-//     } else {
-//         return response(_res).unAuthorized("Invalid username or password");
-//     }
-// }
-
-async function CredentialsController(_req: Request, _res: Response, _next: NextFunction) {
-    // const token = getToken(_req);
-    // const exp = new Date();
-    // // exp.setSeconds(exp.getSeconds() - 1000);
-    // // _res.cookie(TOKEN_KEY, "", {
-    // //     expires: exp
-    // // });
-    return response(_res).OK({
-        user: getAuthenticatedUser(_req),
-        keys: Object.keys(_req.cookies)
-    });
 }
 
 async function ValidateMyUser({ username, password }: IAuthenticationRequest): Promise<IUserValidatorResult> {

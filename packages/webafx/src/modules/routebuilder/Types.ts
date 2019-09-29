@@ -15,7 +15,7 @@ export type TRouteParameter = "string" | "number" | "boolean" | "array";
 /**
  * Type describing a controller method
  */
-export type TRequestHandlerFunction = (req: Request, res: Response, next: NextFunction) => Promise<any>;
+export type TRequestHandlerFunction = (req: Request, res: Response, next: NextFunction) => Promise<any> | any;
 
 /**
  * Type of both RequestController and TRequestHandlerFunction
