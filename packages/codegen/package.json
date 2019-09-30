@@ -1,0 +1,24 @@
+{
+  "name": "codegen",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint -p ./tsconfig.json --fix",
+    "mktypes": "node ./dist/bin/mkdb.js --gen-types",
+    "mkroutes": "node ./dist/bin/mkapi.js --gen-routes",
+    "mkdb": "node ./dist/bin/mkdb.js --gen-database",
+    "build": "yarn build:src && yarn mktypes && yarn mkroutes",
+    "build:src": "rm -fR ./dist && tsc && yarn lint",
+    "watch": "rm -fR ./dist && tsc -w ",
+    "test": "jest --detectOpenHandles --passWithNoTests"
+  },
+  "dependencies": {
+    "@blendsdk/codekit": "^1.1.12",
+    "@blendsdk/schemakit": "^1.1.12",
+    "@blendsdk/sqlkit": "^1.1.12",
+    "@blendsdk/stdlib": "^1.1.12",
+    "@blendsdk/webapi-config": "^1.0.0",
+    "chalk": "^2.4.2"
+  }
+}
