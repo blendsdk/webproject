@@ -21,6 +21,6 @@
 },
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@blendsdk/webafx": "1.0.0"
+    "@blendsdk/webafx": "0.0.1"
   }
 }
