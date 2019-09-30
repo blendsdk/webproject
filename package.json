@@ -12,7 +12,7 @@
     "build2": "lerna run build --stream --ignore codegen",
     "ncu":"lerna exec \"ncu -u\" && rm -fR node_modules yarn.lock && yarn install && yarn bootstrap && yarn build && yarn test",
     "test": "lerna run test --stream",
-    "publish:patch": "yarn build2 && lerna publish --ignore codegen --ignore testapp"
+    "publish:patch": "yarn build2 && lerna publish patch --ignore codegen --ignore testapp"
   },
   "repository": {
     "type": "git",
