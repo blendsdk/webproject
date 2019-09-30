@@ -1,8 +1,7 @@
 {
   "name": "@blendsdk/testapp",
-  "version": "1.0.0",
-  "main": "dist/index.js",
   "private": true,
+  "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "start": "yarn serve",
